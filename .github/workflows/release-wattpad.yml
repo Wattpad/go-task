@@ -1,11 +1,9 @@
 name: Go Build and Release
 
 on:
-  release:
-    types: [ published ]
   push:
-    branches:
-      - CRINF-240-go-task-installation
+    tags:
+      - 'v*'
 
 jobs:
   build:
