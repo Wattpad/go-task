@@ -23,6 +23,9 @@ jobs:
         with:
           go-version: 1.22.x
 
+      - name: testing
+        run: cat README.md
+
       # Build the go-task binary from the current repository
       - name: Build go-task for ${{ matrix.go_os }}-${{ matrix.go_arch }}
         run: |
