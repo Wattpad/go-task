@@ -186,7 +186,7 @@ func (c *Compiler) getSpecialVars(t *ast.Task) (map[string]string, error) {
 		"ROOT_TASKFILE":    filepathext.SmartJoin(c.Dir, c.Entrypoint),
 		"ROOT_DIR":         c.Dir,
 		"TASKFILE":         t.Location.Taskfile,
-		"TASKFILE_DIR":     filepath.Dir(t.Location.Taskfile),
+		"TASKFILE_DIR":     t.Location.TaskfileDir,
 		"USER_WORKING_DIR": c.UserWorkingDir,
 		"TASK_VERSION":     version.GetVersion(),
 	}, nil
