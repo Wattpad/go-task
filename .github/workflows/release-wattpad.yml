@@ -1,0 +1,39 @@
+name: Go Build and Release
+
+on:
+  release:
+    types: [ published ]
+
+jobs:
+  build:
+    name: Build and Release
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        go_os: [ linux, darwin, windows ]
+        go_arch: [ amd64, arm64 ]
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Set up Go
+        uses: actions/setup-go@v5
+        with:
+          go-version: 1.22.x
+
+      # Build the go-task binary from the current repository
+      - name: Build go-task for ${{ matrix.go_os }}-${{ matrix.go_arch }}
+        run: |
+          GOOS=${{ matrix.go_os }} \
+          GOARCH=${{ matrix.go_arch }} \
+          go build \
+            -o go-task-${{ matrix.go_os }}-${{ matrix.go_arch }} \
+            ./cmd/task
+
+      - name: Upload Release Asset
+        env:
+          GITHUB_TOKEN: ${{ secrets.GH_PAT }}
+        run: |
+          gh release upload ${{ github.event.release.tag_name }} ./go-task-${{ matrix.go_os }}-${{ matrix.go_arch }}
