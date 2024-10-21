@@ -29,11 +29,16 @@ jobs:
           GOOS=${{ matrix.go_os }} \
           GOARCH=${{ matrix.go_arch }} \
           go build \
-            -o go-task-${{ matrix.go_os }}-${{ matrix.go_arch }} \
+            -o task_${{ matrix.go_os }}_${{ matrix.go_arch }} \
             ./cmd/task
+
+      # Compress the go-task binary
+      - name: Compress go-task for ${{ matrix.go_os }}-${{ matrix.go_arch }}
+        run: |
+          tar -cvzf task_${{ matrix.go_os }}_${{ matrix.go_arch }}.tar.gz task_${{ matrix.go_os }}_${{ matrix.go_arch }}
 
       - name: Upload Release Asset
         env:
           GITHUB_TOKEN: ${{ secrets.GH_PAT }}
         run: |
-          gh release upload ${{ github.event.release.tag_name }} ./go-task-${{ matrix.go_os }}-${{ matrix.go_arch }}
+          gh release upload ${{ github.event.release.tag_name }} ./task_${{ matrix.go_os }}_${{ matrix.go_arch }}.tar.gz
