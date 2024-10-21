@@ -101,13 +101,13 @@ winget:
     license: MIT
     homepage: https://taskfile.dev/
     publisher_url: https://taskfile.dev/
-    publisher_support_url: https://github.com/go-task/task/issues
+    publisher_support_url: https://github.com/Wattpad/go-task/task/issues
     package_identifier: Task.Task
     commit_author:
       name: task-bot
       email: 106601941+task-bot@users.noreply.github.com
     commit_msg_template: "chore: bump {{.PackageIdentifier}} to {{.Tag}}"
-    release_notes_url: https://github.com/go-task/task/releases/tag/{{.Tag}}
+    release_notes_url: https://github.com/Wattpad/go-task/task/releases/tag/{{.Tag}}
     tags:
       - build
       - build-tool
