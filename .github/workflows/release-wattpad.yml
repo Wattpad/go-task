@@ -29,7 +29,7 @@ jobs:
           GOOS=${{ matrix.go_os }} \
           GOARCH=${{ matrix.go_arch }} \
           go build \
-            -o task_${{ matrix.go_os }}_${{ matrix.go_arch }} \
+            -o task_${{ matrix.go_os }}_${{ matrix.go_arch }}/task \
             ./cmd/task
 
       # Compress the go-task binary
