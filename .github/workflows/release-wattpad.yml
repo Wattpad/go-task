@@ -29,13 +29,17 @@ jobs:
           GOOS=${{ matrix.go_os }} \
           GOARCH=${{ matrix.go_arch }} \
           go build \
-            -o task_${{ matrix.go_os }}_${{ matrix.go_arch }}/task \
+            -o task \
             ./cmd/task
 
       # Compress the go-task binary
       - name: Compress go-task for ${{ matrix.go_os }}-${{ matrix.go_arch }}
         run: |
-          tar -cvzf task_${{ matrix.go_os }}_${{ matrix.go_arch }}.tar.gz task_${{ matrix.go_os }}_${{ matrix.go_arch }}
+          tar -cvzf task_${{ matrix.go_os }}_${{ matrix.go_arch }}.tar.gz \
+            task \
+            README.md \
+            LICENSE \
+            completion/
 
       - name: Upload Release Asset
         env:
