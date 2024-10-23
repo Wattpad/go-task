@@ -28,6 +28,7 @@ jobs:
         run: |
           GOOS=${{ matrix.go_os }} \
           GOARCH=${{ matrix.go_arch }} \
+          CGO_ENABLED=0 \
           go build \
             -o task \
             ./cmd/task
